@@ -13,7 +13,7 @@ from constants import CSV_LOGS_DIR
 from utils.constants import (
     PANELS_MEATBALL_MENU_TESTID_TEMPLATE, PANEL_CARD_TESTID_TEMPLATE,
     EXPLORE_DATA_TESTID, RADIO_BUTTONS_DATA_TESTID,
-    DOWNLOAD_ARIA_LABEL,
+    DOWNLOAD_ARIA_LABEL, REFRESH_DATA_TESTID,
     TIME_RANGE_FROM_FIELD_TESTID,
     TIME_RANGE_OPEN_TESTID,
 )
@@ -73,6 +73,30 @@ def navigate_to_logs(driver: WebDriver, panel_name: str):
 
       if log_radio_button:
           log_radio_button.click()
+
+          LOG_OPTIONS_XPATH = "/html/body/div[1]/div/div[1]/div[1]/div/main/div[2]/div/div/div[1]/div/div[2]/div/div[2]/div/div/div[1]/div/div[1]/div/div/div/div[2]/div/div[4]/div[2]/div/button"
+          options = WebDriverWait(driver, 10).until(
+              EC.element_to_be_clickable((By.XPATH, LOG_OPTIONS_XPATH)),
+              f"Could not find {panel_name}"
+          )
+          options.click()
+
+          INPUT_FIELD_XPATH = f"//input[@placeholder=\"500\"]"
+          input_field = WebDriverWait(driver, 10).until(
+              EC.presence_of_element_located((By.XPATH, INPUT_FIELD_XPATH)),
+              f"Could not find {panel_name}"
+          )
+          input_field.clear()
+          input_field.send_keys("9999")
+          input_field.send_keys(Keys.RETURN)
+
+          REFRESH_BUTTON_XPATH = f"//button[@data-testid=\"{REFRESH_DATA_TESTID}\"]"
+          for _ in range(2):
+            refresh_button = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, REFRESH_BUTTON_XPATH)),
+                f"Could not find {panel_name}"
+            )
+            refresh_button.click()
       else:
           print(f"Could not find Logs radio button for {panel_name}")
 

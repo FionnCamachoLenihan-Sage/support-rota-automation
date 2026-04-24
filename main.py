@@ -125,7 +125,7 @@ def build_formatted_template(template: dict[str, dict[str, str]]):
 
 def main():
   if len(sys.argv) != 3:
-    print("Usage: python main.py [ENOTARGETURL] [TIME_RANGE]")
+    print("Usage: python main.py incorrect args")
     return
   
   target_url = sys.argv[1]

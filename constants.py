@@ -1,0 +1,50 @@
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROFILE_DIR = os.path.join(BASE_DIR, ".chrome_profile")
+SCREENSHOTS_DIR = os.path.join(BASE_DIR, "screenshots")
+CSV_LOGS_DIR = os.path.join(BASE_DIR, "tmp_logs")
+
+LOG_GROUP_API = "api"
+LOG_GROUP_PUBLISHER = "publisher"
+LOG_GROUP_WORKERS = "workers"
+LOG_GROUP_WORKER = "worker"
+LOG_GROUP_TYPES = [LOG_GROUP_API, LOG_GROUP_PUBLISHER, LOG_GROUP_WORKERS, LOG_GROUP_WORKER] # Only relevant for the "Errors" panel, can be used to further categorize errors in the logs
+LOG_GROUP_TYPES_OTHER = "other"
+TEMPLATE_HEADING_API = "API Errors"
+TEMPLATE_HEADING_PUBLISHER = "Publisher Errors"
+TEMPLATE_HEADING_WORKER = "Worker Errors"
+TEMPLATE_HEADING_OTHER = "Other Errors (Maintenance tasks etc)"
+TEMPLATE_HEADING_SLOW_QUERIES = "Slow Queries"
+TEMPLATE_HEADING_TIMEOUTS = "Timeouts"
+TEMPLATE_HEADING_500S = "500 Responses"
+TEMPLATE_HEADING_DQL_MESSAGES = "DQL Messages"
+TEMPLATE: dict[str, dict[str, str]] = {
+  TEMPLATE_HEADING_API: {},
+  TEMPLATE_HEADING_PUBLISHER: {},
+  TEMPLATE_HEADING_WORKER: {},
+  TEMPLATE_HEADING_DQL_MESSAGES: {},
+  TEMPLATE_HEADING_SLOW_QUERIES: {},
+  TEMPLATE_HEADING_TIMEOUTS: {},
+  TEMPLATE_HEADING_OTHER: {},
+  TEMPLATE_HEADING_500S: {},
+}
+TEMPLATE_TRANSLATIONS: dict[str, str] = {
+  LOG_GROUP_API: TEMPLATE_HEADING_API,
+  LOG_GROUP_PUBLISHER: TEMPLATE_HEADING_PUBLISHER,
+  LOG_GROUP_WORKERS: TEMPLATE_HEADING_WORKER,
+  LOG_GROUP_WORKER: TEMPLATE_HEADING_WORKER,
+  LOG_GROUP_TYPES_OTHER: TEMPLATE_HEADING_OTHER,
+  "Timeouts": TEMPLATE_HEADING_TIMEOUTS,
+  "Very Slow Queries": TEMPLATE_HEADING_SLOW_QUERIES,
+  "500's": TEMPLATE_HEADING_500S,
+  "DQL Messages - Standard": TEMPLATE_HEADING_DQL_MESSAGES,
+}
+
+PANEL_LIST = [
+    "Errors",
+    "Timeouts",
+    "Very Slow Queries",
+    "500's",
+    "DQL Messages - Standard",
+]

@@ -1,0 +1,7 @@
+.chrome_profile/
+screenshots/
+tmp_logs/
+.venv/
+__pycache__/
+tmp_logs/
+output.txt

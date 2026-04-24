@@ -82,12 +82,12 @@ def navigate_to_logs(driver: WebDriver, panel_name: str):
 
 def download_logs(driver: WebDriver):
   try:
-    download_button = WebDriverWait(driver, 10).until(
+    download_button = WebDriverWait(driver, 3).until(
       EC.element_to_be_clickable((By.XPATH, f"//button[@aria-label='{DOWNLOAD_ARIA_LABEL}']"))
     )
     download_button.click()
 
-    csv_button = WebDriverWait(driver, 10).until(
+    csv_button = WebDriverWait(driver, 3).until(
       EC.element_to_be_clickable((By.XPATH, "//button[.//span[text()='csv']]"))
     )
     csv_button.click()
@@ -124,7 +124,7 @@ def change_time_range(driver: WebDriver, time_range: str):
     from_field.send_keys(f"now-{time_range}")
     from_field.send_keys(Keys.RETURN)
     print(f"Changed time range to now-{time_range}")
-    time.sleep(5) # Wait for logs to refresh after changing time range
+    time.sleep(2) # Wait for logs to refresh after changing time range
 
   except TimeoutException:
     print("Could not find time range button or desired time range option")

@@ -2,7 +2,7 @@
 
 When first using this program a new `.chrome_profile` directory will be created at the root of this project. To populate this with the correct credentials, you will need to sign-in to GitHub to allow access to Grafana. This only needs to be done once. On subsequent runs the program will be fully automatic.
 
-`python main.py <grafana_url> <HHh>`
+`python main.py "<grafana_url>" <HHh>`
 
 Where `<grafana_url>` is the URL to the Grafana dashboard containing "Errors", "Timeouts", "Very Slow Queries", "DLQ Messages - Standard", and "500's".
 
@@ -19,3 +19,5 @@ This program is a bit lacking in error messages, so it is wise to compare the sc
 ## Important Note
 
 This program does not yet deal with DLQ messages whatsoever.
+
+Be wary of any default time-frames included in the query parameters of the Grafana link. Regardless, you may override this with the program argument if need be.

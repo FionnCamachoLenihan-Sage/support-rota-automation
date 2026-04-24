@@ -195,6 +195,7 @@ def main():
     driver.switch_to.window(driver.window_handles[0])
 
   driver.close()
+  print(json.dumps(template, indent=2))
   build_formatted_template(template)
 
 

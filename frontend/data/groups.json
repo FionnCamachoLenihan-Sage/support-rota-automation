@@ -1,0 +1,18 @@
+[
+  {
+    "id": "7ebb63e9-dc0f-49a3-897f-e0006d500f3a",
+    "grafana_url": "test",
+    "errors": "test",
+    "timeouts": "test",
+    "slow_queries": "test",
+    "five_hundreds": "test"
+  },
+  {
+    "id": "9188adbd-7187-47a7-bc45-0bbfac174c43",
+    "grafana_url": "test2",
+    "errors": "test2",
+    "timeouts": "test2",
+    "slow_queries": "test2",
+    "five_hundreds": "test2"
+  }
+]

@@ -1,14 +1,50 @@
 .create-group {
-  border-color: green;
-  border-width: 2px;
-  border-style: solid;
-  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  border: 2px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
 }
 
 .create-group-form {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
-  text-align: left;
+}
+
+.create-group-form > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.create-group-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.create-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 }

@@ -3,13 +3,17 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .groups {
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 2em;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  margin: 2em;
+  width: 100%;
 }
 
 .add-button {
@@ -19,5 +23,37 @@
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.all-metrics-button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dashboard-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
   margin-top: 20px;
+}
+
+.hours-input {
+  width: 50px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.hours-label {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
 }

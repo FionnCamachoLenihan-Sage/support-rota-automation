@@ -2,12 +2,15 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./CreateGroup.css";
 import { invoke } from "@tauri-apps/api/core";
+import { IGroup } from "../Dashboard/Dashboard";
 
-function CreateGroup({
-  setIsAddingGroup,
-}: {
+type CreateGroupProps = {
   setIsAddingGroup: (isAdding: boolean) => void;
-}) {
+  setGroups: React.Dispatch<React.SetStateAction<IGroup[]>>;
+};
+
+function CreateGroup({ setIsAddingGroup, setGroups }: CreateGroupProps) {
+  const [groupName, setGroupName] = useState("");
   const [grafanaUrl, setGrafanaUrl] = useState("");
   const [errors, setErrors] = useState("");
   const [timeouts, setTimeouts] = useState("");
@@ -20,6 +23,7 @@ function CreateGroup({
     const groupId = uuidv4();
 
     const group = {
+      group_name: groupName,
       id: groupId,
       grafana_url: grafanaUrl,
       errors,
@@ -31,6 +35,7 @@ function CreateGroup({
     await invoke("append_group", { group });
 
     setIsAddingGroup(false);
+    setGroups((prevGroups) => [...prevGroups, group]);
   };
 
   return (
@@ -42,6 +47,14 @@ function CreateGroup({
             type="text"
             value={grafanaUrl}
             onChange={(e) => setGrafanaUrl(e.target.value)}
+          />
+        </div>
+        <div>
+          <p>Enter your Group Name:</p>
+          <input
+            type="text"
+            value={groupName}
+            onChange={(e) => setGroupName(e.target.value)}
           />
         </div>
         <div>

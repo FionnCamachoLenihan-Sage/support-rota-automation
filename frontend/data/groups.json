@@ -1,1 +1,92 @@
-[]
+[
+  {
+    "group_name": "Connected Bridge Production",
+    "id": "6422d4eb-7236-40a6-ae89-61d69898082f",
+    "grafana_url": "https://grafana.logging.sbc-tooling.com/d/48LIv4Bnz/sbc-bridge-daily-check?orgId=5",
+    "errors": "@log_group: (\"global\" AND production* AND \"bridge\") AND LogLevel:\"Error\"",
+    "timeouts": "@log_group: (\"global\" AND production* AND \"bridge\") AND Correlation.Span.Attributes.ResponseCode: \"408\"",
+    "slow_queries": "@log_group: (\"global\" AND production* AND \"bridge\") AND Correlation.Span.Category:\"mysql\" AND Correlation.Span.Duration : [1 TO *] AND NOT Correlation.Span.Attributes.SqlBuilder.IgnoreSlowQuery: true",
+    "five_hundreds": "@log_group: (\"global\" AND production* AND \"bridge\") AND Correlation.Span.Attributes.ResponseCode: 500"
+  },
+  {
+    "group_name": "Connected Bridge Sandbox",
+    "id": "689f77c0-f873-481e-b015-f24fcc1d7488",
+    "grafana_url": "https://grafana.logging.sbc-tooling.com/d/1F5Rxzf7k/sbc-bridge-daily-check?orgId=4",
+    "errors": "@log_group: (\"global\" AND sandbox* AND \"bridge\") AND LogLevel:\"Error\"",
+    "timeouts": "@log_group: (\"global\" AND sandbox* AND \"bridge\") AND Correlation.Span.Attributes.ResponseCode: \"408\"",
+    "slow_queries": "@log_group: (\"global\" AND sandbox* AND \"bridge\") AND Correlation.Span.Category:\"mysql\" AND Correlation.Span.Duration : [1 TO *] AND NOT Correlation.Span.Attributes.SqlBuilder.IgnoreSlowQuery: true",
+    "five_hundreds": "@log_group: (\"global\" AND sandbox* AND \"bridge\") AND Correlation.Span.Attributes.ResponseCode: 500"
+  },
+  {
+    "group_name": "Notification Production",
+    "id": "f4b57f41-a7c3-46e1-b8e9-f8ea5deb3acd",
+    "grafana_url": "https://grafana.logging.sbc-tooling.com/d/sCYbTfanz/sbc-notification-daily-check?orgId=5",
+    "errors": "@log_group: (\"global\" AND production* AND \"notification\") AND LogLevel:\"Error\"",
+    "timeouts": "@log_group: (\"global\" AND production* AND \"notification\") AND Correlation.Span.Attributes.ResponseCode: \"408\"",
+    "slow_queries": "@log_group: (\"global\" AND production* AND \"notification\") AND Correlation.Span.Category:\"mysql\" AND Correlation.Span.Duration : [1 TO *] AND NOT Correlation.Span.Attributes.SqlBuilder.IgnoreSlowQuery: true",
+    "five_hundreds": "@log_group: (\"global\" AND production* AND \"notification\") AND Correlation.Span.Attributes.ResponseCode: 500"
+  },
+  {
+    "group_name": "Notification Sandbox",
+    "id": "8a611f05-63d8-4aec-9c51-102371b0f9b4",
+    "grafana_url": "https://grafana.logging.sbc-tooling.com/d/y4uKVxa7k/sbc-notification-daily-check?orgId=4",
+    "errors": "@log_group: (\"global\" AND sandbox* AND \"notification\") AND LogLevel:\"Error\"",
+    "timeouts": "@log_group: (\"global\" AND sandbox* AND \"notification\") AND Correlation.Span.Attributes.ResponseCode: \"408\"",
+    "slow_queries": "@log_group: (\"global\" AND sandbox* AND \"notification\") AND Correlation.Span.Category:\"mysql\" AND Correlation.Span.Duration : [1 TO *] AND NOT Correlation.Span.Attributes.SqlBuilder.IgnoreSlowQuery: true",
+    "five_hundreds": "@log_group: (\"global\" AND sandbox* AND \"notification\") AND Correlation.Span.Attributes.ResponseCode: 500"
+  },
+  {
+    "group_name": "Globalnav Production",
+    "id": "261a1304-dd41-470c-999d-3bbb899a97c9",
+    "grafana_url": "https://grafana.logging.sbc-tooling.com/d/g67oDEB7k/sbc-globalnav-daily-check?orgId=5",
+    "errors": "@log_group: (\"global\" AND production* AND \"globalnav\") AND LogLevel:\"Error\"",
+    "timeouts": "@log_group: (\"global\" AND production* AND \"globalnav\") AND Correlation.Span.Attributes.ResponseCode: \"408\"",
+    "slow_queries": "@log_group: (\"global\" AND production* AND \"globalnav\") AND Correlation.Span.Category:\"mysql\" AND Correlation.Span.Duration : [1 TO *] AND NOT Correlation.Span.Attributes.SqlBuilder.IgnoreSlowQuery: true",
+    "five_hundreds": "@log_group: (\"global\" AND production* AND \"globalnav\") AND Correlation.Span.Attributes.ResponseCode: 500"
+  },
+  {
+    "group_name": "Globalnav Sandbox",
+    "id": "10140334-fa40-4f2a-93b4-6c867d073801",
+    "grafana_url": "https://grafana.logging.sbc-tooling.com/d/jQW1DPB7k/sbc-globalnav-daily-check?orgId=4",
+    "errors": "@log_group: (\"global\" AND sandbox* AND \"globalnav\") AND LogLevel:\"Error\"",
+    "timeouts": "@log_group: (\"global\" AND sandbox* AND \"globalnav\") AND Correlation.Span.Attributes.ResponseCode: \"408\"",
+    "slow_queries": "@log_group: (\"global\" AND sandbox* AND \"globalnav\") AND Correlation.Span.Category:\"mysql\" AND Correlation.Span.Duration : [1 TO *] AND NOT Correlation.Span.Attributes.SqlBuilder.IgnoreSlowQuery: true",
+    "five_hundreds": "@log_group: (\"global\" AND sandbox* AND \"globalnav\") AND Correlation.Span.Attributes.ResponseCode: 500"
+  },
+  {
+    "group_name": "Provisioner Production",
+    "id": "24da747a-7f75-4473-a8d3-c0e6c7dfc259",
+    "grafana_url": "https://grafana.logging.sbc-tooling.com/d/oWnGvZY7z/sbc-provisioner-daily-check?orgId=5",
+    "errors": "@log_group: (\"global\" AND production* AND \"provisioner\") AND LogLevel:\"Error\"",
+    "timeouts": "@log_group: (\"global\" AND production* AND \"provisioner\") AND Correlation.Span.Attributes.ResponseCode: \"408\"",
+    "slow_queries": "@log_group: (\"global\" AND production* AND \"provisioner\") AND Correlation.Span.Category:\"mysql\" AND Correlation.Span.Duration : [1 TO *] AND NOT Correlation.Span.Attributes.SqlBuilder.IgnoreSlowQuery: true",
+    "five_hundreds": "@log_group: (\"global\" AND production* AND \"provisioner\") AND Correlation.Span.Attributes.ResponseCode: 500"
+  },
+  {
+    "group_name": "Provisioner Sandbox",
+    "id": "e5aaeb50-3bf6-4274-b122-e81b55b5622f",
+    "grafana_url": "https://grafana.logging.sbc-tooling.com/d/cPpmDZLnk/sbc-provisioner-daily-check?orgId=4",
+    "errors": "@log_group: (\"global\" AND sandbox* AND \"provisioner\") AND LogLevel:\"Error\"",
+    "timeouts": "@log_group: (\"global\" AND sandbox* AND \"provisioner\") AND Correlation.Span.Attributes.ResponseCode: \"408\"",
+    "slow_queries": "@log_group: (\"global\" AND sandbox* AND \"provisioner\") AND Correlation.Span.Category:\"mysql\" AND Correlation.Span.Duration : [1 TO *] AND NOT Correlation.Span.Attributes.SqlBuilder.IgnoreSlowQuery: true",
+    "five_hundreds": "@log_group: (\"global\" AND sandbox* AND \"provisioner\") AND Correlation.Span.Attributes.ResponseCode: 500"
+  },
+  {
+    "group_name": "Adapter Production",
+    "id": "c2039322-48d1-4ea3-87d3-e2446809711e",
+    "grafana_url": "https://grafana.logging.sbc-tooling.com/d/weiWSeL7z/sbc-slcsadapter-daily-check?orgId=5",
+    "errors": "@log_group: (\"global\" AND production* AND \"slcsadapter\") AND LogLevel:\"Error\"",
+    "timeouts": "@log_group: (\"global\" AND production* AND \"slcsadapter\") AND Correlation.Span.Attributes.ResponseCode: \"408\"",
+    "slow_queries": "@log_group: (\"global\" AND production* AND \"slcsadapter\") AND Correlation.Span.Category:\"mysql\" AND Correlation.Span.Duration : [1 TO *] AND NOT Correlation.Span.Attributes.SqlBuilder.IgnoreSlowQuery: true",
+    "five_hundreds": "@log_group: (\"global\" AND production* AND \"slcsadapter\") AND Correlation.Span.Attributes.ResponseCode: 500"
+  },
+  {
+    "group_name": "Adapter Sandbox",
+    "id": "a0a5e467-93cc-4a4b-b41c-ae6bf8c4becf",
+    "grafana_url": "https://grafana.logging.sbc-tooling.com/d/O_HGSeLnk/sbc-slcsadapter-daily-check?orgId=4",
+    "errors": "@log_group: (\"global\" AND sandbox* AND \"slcsadapter\") AND LogLevel:\"Error\"",
+    "timeouts": "@log_group: (\"global\" AND sandbox* AND \"slcsadapter\") AND Correlation.Span.Attributes.ResponseCode: \"408\"",
+    "slow_queries": "@log_group: (\"global\" AND sandbox* AND \"slcsadapter\") AND Correlation.Span.Category:\"mysql\" AND Correlation.Span.Duration : [1 TO *] AND NOT Correlation.Span.Attributes.SqlBuilder.IgnoreSlowQuery: true",
+    "five_hundreds": "@log_group: (\"global\" AND sandbox* AND \"slcsadapter\") AND Correlation.Span.Attributes.ResponseCode: 500"
+  }
+]

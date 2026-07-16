@@ -1,23 +1,41 @@
 # Usage
 
+To preface, this app is geared towards the way Squad Skellig does their Support Rota.
+
+To start, first create a query group. This will include the link to the grafana dashboard, followed by a number of types of metrics. These will correspond to the 4 elasticsearch queries found in Grafana.
+
+Excluded from this is the DLQ panel. This should be done by a human.
+
 When first using this program a new `.chrome_profile` directory will be created at the root of this project. To populate this with the correct credentials, you will need to sign-in to GitHub to allow access to Grafana. This only needs to be done once. On subsequent runs the program will be fully automatic.
 
-`python main.py "<grafana_url>" <HHh>`
+If the program doesn't work after trying for a while, deleting the `.chrome_profile` can help. This shouldn't be necessary though.
 
-Where `<grafana_url>` is the URL to the Grafana dashboard containing "Errors", "Timeouts", "Very Slow Queries", "DLQ Messages - Standard", and "500's".
+After creating your profile, all that needs to be done is to click `Get Metrics`.
 
-and `<HHh>` is the time range in hours. Usually 24h or 72h.
+You may copy both the screenshot and also the formatted analytics themselves by clicking the corresponding copy-to clipboard-buttons.
 
-There is an example in `notification-service.sh` on how to use this script.
+## Important Notes
 
-The output will be generated to `output.txt` and screenshots will be saved to the `screenshots/` directory.
+### Maximum Number of Logs
 
-All temporary files are cleared per interpretation of `main.py`.
+This program can get up to 10,000 logs at a time for any given query. This means 40,000 logs split evenly among the elasticsearch queries. This should be more than enough.
 
-This program is a bit lacking in error messages, so it is wise to compare the screenshot numbers with the numbers of errors given in output.txt. If these totals match (+- a few), then the program worked.
+### Screenshot-Grafana Timeouts
 
-## Important Note
+For longer hours (such as 72h on a Monday), the elasticsearch queries to get the Grafana screenshot might take too long to get a proper screenshot, but it should still get the metrics. You just may have to bust out Snipping Tool.
 
-This program does not yet deal with DLQ messages whatsoever.
+### Only Production and Sandbox
 
-Be wary of any default time-frames included in the query parameters of the Grafana link. Regardless, you may override this with the program argument if need be.
+Due to the way Grafana API queries work with the data source endpoint `POST /api/ds/query`. A UID must be given to get the correct environment. For `production` this is 00000007, and for `sandbox` this is 00000006. This is currently matched based off of the `orgId=N` parameter you can see at the end of the Grafana URLS. Other environments can be achieved, but for now it is just production and sandbox.
+
+### Error Handling
+
+Yeah, it could just be better at this point.
+
+### Closing The App
+
+Following from this, if you have metrics stored in the app, restarting it will lose all your metrics. Not a big deal as it takes so little time to get them again, but just something to keep in mind.
+
+## Pro Tip
+
+After pasting into Slack, press `ctrl + shift + f` to format the metrics.

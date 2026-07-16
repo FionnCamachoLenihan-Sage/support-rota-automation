@@ -1,7 +1,24 @@
+# Python
 .chrome_profile/
 screenshots/
 tmp_logs/
 .venv/
 __pycache__/
-tmp_logs/
 output.txt
+
+# Node / Frontend
+node_modules/
+dist/
+.env
+.env.*
+*.local
+
+# Tauri
+frontend/src-tauri/target/
+frontend/src-tauri/gen/schemas/
+frontend/src-tauri/icons/
+WixTools/
+
+# Logs
+*.log
+npm-debug.log*

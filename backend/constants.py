@@ -2,7 +2,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROFILE_DIR = os.path.join(BASE_DIR, ".chrome_profile")
-SCREENSHOTS_DIR = os.path.join(BASE_DIR, "screenshots")
+SCREENSHOTS_DIR = os.path.join(BASE_DIR, "../frontend/data/screenshots")
 CSV_LOGS_DIR = os.path.join(BASE_DIR, "tmp_logs")
 
 LOG_GROUP_API = "api"

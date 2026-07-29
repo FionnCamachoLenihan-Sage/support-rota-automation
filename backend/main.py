@@ -59,7 +59,8 @@ def main():
   driver.get(target_url)
 
   if first_run:
-    input()
+    while getGrafanaSessionCookie(driver) is None:
+      time.sleep(1)
 
   try:
     sign_in_link = WebDriverWait(driver, 3).until(

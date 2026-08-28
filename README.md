@@ -36,10 +36,6 @@ __Note:__ There is probably something missing here so just message yours truly i
 
 This program can get up to 10,000 logs at a time for any given query. This means 40,000 logs split evenly among the elasticsearch queries. This should be more than enough.
 
-### Screenshot-Grafana Timeouts
-
-For longer hours (such as 72h on a Monday), the elasticsearch queries to get the Grafana screenshot might take too long to get a proper screenshot, but it should still get the metrics. You just may have to bust out Snipping Tool.
-
 ### Only Production and Sandbox
 
 Due to the way Grafana API queries work with the data source endpoint `POST /api/ds/query`. A UID must be given to get the correct environment. For `production` this is 00000007, and for `sandbox` this is 00000006. This is currently matched based off of the `orgId=N` parameter you can see at the end of the Grafana URLS. Other environments can be achieved, but for now it is just production and sandbox.

@@ -16,8 +16,24 @@ type LogErrors = dict[str, dict[str, str | int]]
 
 from utils.navigation import change_time_range
 
+# Wait for Grafana panel loading bar animations to finish
 def screenshot(driver: WebDriver, id: str):
-  time.sleep(5)
+  while True:
+    time.sleep(1)
+    try:
+      loading_bars = driver.execute_script(# type: ignore
+        """
+          return Array.from(document.querySelectorAll('div')).filter(el =>
+            getComputedStyle(el).animationName === 'animation-ttfgma'
+          );
+        """
+      )
+      if len(loading_bars) == 0:
+        break
+    except Exception as e:
+      print(f"Error checking for loading bars: {e}")
+      break
+
   os.makedirs(SCREENSHOTS_DIR, exist_ok=True)
   timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
   screenshot_path = os.path.join(SCREENSHOTS_DIR, f"{id}_{timestamp}.png")
@@ -38,7 +54,6 @@ def main():
   target_url = sys.argv[1]
   time_range = sys.argv[2]
   id = sys.argv[3]
-  first_run = not os.path.exists(PROFILE_DIR)
 
   options = Options()
   options.add_argument(f"--user-data-dir={PROFILE_DIR}")
@@ -58,9 +73,8 @@ def main():
 
   driver.get(target_url)
 
-  if first_run:
-    while getGrafanaSessionCookie(driver) is None:
-      time.sleep(1)
+  while getGrafanaSessionCookie(driver) is None:
+    time.sleep(1)
 
   try:
     sign_in_link = WebDriverWait(driver, 3).until(

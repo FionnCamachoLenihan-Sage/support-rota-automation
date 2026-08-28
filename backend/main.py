@@ -95,14 +95,12 @@ def main():
   screenshot(driver, id)
 
   grafana_session_cookie = getGrafanaSessionCookie(driver)
+  driver.quit()
+
   if grafana_session_cookie:
     print(json.dumps({ "grafana_session": grafana_session_cookie }))
-    return
-
-  driver.close()
-
-  print(json.dumps({ "error": "No Grafana Session Found" }))
-  return None
+  else:
+    print(json.dumps({ "error": "No Grafana Session Found" }))
 
 
 if __name__ == "__main__":

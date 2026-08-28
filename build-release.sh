@@ -7,6 +7,8 @@ OUT="release/rota-automation"
 rm -rf "$OUT"
 mkdir -p "$OUT/backend/utils" "$OUT/data"
 
+cp frontend/data/groups.json "$OUT/data/" 2>/dev/null || true
+
 cp frontend/src-tauri/target/release/rota-automation-frontend.exe "$OUT/"
 cp backend/main.py backend/constants.py backend/requirements.txt "$OUT/backend/"
 cp backend/utils/*.py "$OUT/backend/utils/"

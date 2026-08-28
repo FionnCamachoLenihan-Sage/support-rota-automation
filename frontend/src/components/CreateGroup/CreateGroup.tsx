@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import "./CreateGroup.css";
 import { invoke } from "@tauri-apps/api/core";
 import { IGroup } from "../Dashboard/Dashboard";
@@ -20,7 +19,7 @@ function CreateGroup({ setIsAddingGroup, setGroups }: CreateGroupProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const groupId = uuidv4();
+    const groupId = crypto.randomUUID();
 
     const group = {
       group_name: groupName,

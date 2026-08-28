@@ -21,3 +21,6 @@ WixTools/
 # Logs
 *.log
 npm-debug.log*
+
+# Build
+release/

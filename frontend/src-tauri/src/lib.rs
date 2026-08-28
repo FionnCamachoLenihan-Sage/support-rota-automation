@@ -29,12 +29,26 @@ struct LogCount {
 }
 
 const ONE_HOUR_IN_MILLIS: u64 = 60 * 60 * 1000;
+
+fn get_base_dir() -> PathBuf {
+    if cfg!(debug_assertions) {
+        // Dev: resolve relative to the Cargo project
+        PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+    } else {
+        // Release: resolve relative to the executable
+        std::env::current_exe()
+            .expect("failed to get exe path")
+            .parent()
+            .expect("exe has no parent dir")
+            .to_path_buf()
+    }
+}
 const DS_QUERY_ENDPOINT: &str = "https://grafana.logging.sbc-tooling.com/api/ds/query?ds_type=elasticsearch&requestId=explore_63q";
 const MAX_KEY_LEN: usize = 500;
 
 #[tauri::command]
 fn append_group(group: Group) -> Result<(), String> {
-    let data_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data");
+    let data_dir = if cfg!(debug_assertions) { get_base_dir().join("../data") } else { get_base_dir().join("data") };
     fs::create_dir_all(&data_dir).map_err(|e| e.to_string())?;
 
     let file_path = data_dir.join("groups.json");
@@ -56,7 +70,7 @@ fn append_group(group: Group) -> Result<(), String> {
 
 #[tauri::command]
 fn delete_group(id: String) -> Result<(), String> {
-    let data_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data");
+    let data_dir = if cfg!(debug_assertions) { get_base_dir().join("../data") } else { get_base_dir().join("data") };
     let file_path = data_dir.join("groups.json");
 
     if !file_path.exists() {
@@ -76,7 +90,7 @@ fn delete_group(id: String) -> Result<(), String> {
 
 #[tauri::command]
 fn get_groups() -> Result<Vec<Group>, String> {
-    let data_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data");
+    let data_dir = if cfg!(debug_assertions) { get_base_dir().join("../data") } else { get_base_dir().join("data") };
     let file_path = data_dir.join("groups.json");
 
     if !file_path.exists() {
@@ -91,7 +105,7 @@ fn get_groups() -> Result<Vec<Group>, String> {
 
 #[tauri::command]
 async fn get_group_metrics(id: String, time_frame: u64) -> Result<String, String> {
-    let data_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data");
+    let data_dir = if cfg!(debug_assertions) { get_base_dir().join("../data") } else { get_base_dir().join("data") };
     let file_path = data_dir.join("groups.json");
 
     if !file_path.exists() {
@@ -103,7 +117,7 @@ async fn get_group_metrics(id: String, time_frame: u64) -> Result<String, String
 
     let group = groups.into_iter().find(|group| group.id == id).ok_or_else(|| "Group not found".to_string())?;
 
-    let script_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../backend");
+    let script_dir = if cfg!(debug_assertions) { get_base_dir().join("../../backend") } else { get_base_dir().join("python_scripts") };
 
     let output = std::process::Command::new("python")
         .arg(script_dir.join("main.py"))

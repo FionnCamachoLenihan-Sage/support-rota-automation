@@ -86,44 +86,45 @@ function Group({
 
   return (
     <div className="group">
+      <h2>{group_name}</h2>
       {!metrics && !isLoading ? (
-        <p>No metrics this session</p>
+        <p className="status-pill none">No metrics this session</p>
       ) : isLoading ? (
-        <p>Loading...</p>
+        <p className="status-pill loading">Loading...</p>
       ) : (
         <div className="button-group">
+          <p className="status-pill done">Metrics available</p>
           <button
-            className="copy-metrics-button"
+            className="copy-button"
             onClick={handleCopyMetricsToClipboard}
           >
             Copy Metrics
           </button>
           <button
-            className="copy-screenshot-button"
+            className="copy-button"
             onClick={handleCopyScreenshotToClipboard}
           >
             Copy Screenshot
           </button>
         </div>
       )}
-      <h2>{group_name}</h2>
-      <div>
+      <div className="log-group">
         <p>Grafana URL: </p>
         <p>{grafana_url}</p>
       </div>
-      <div>
+      <div className="log-group">
         <p>Errors: </p>
         <p>{errors}</p>
       </div>
-      <div>
+      <div className="log-group">
         <p>Timeouts: </p>
         <p>{timeouts}</p>
       </div>
-      <div>
+      <div className="log-group">
         <p>Slow Queries: </p>
         <p>{slow_queries}</p>
       </div>
-      <div>
+      <div className="log-group">
         <p>500s: </p>
         <p>{five_hundreds}</p>
       </div>

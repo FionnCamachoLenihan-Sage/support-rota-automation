@@ -156,6 +156,9 @@ async fn fetch_grafana_logs(session_cookie: String, group: Group, time_frame: u6
         ("500 Responses", group.five_hundreds) 
     ]);
 
+    // The conditional below is a hack to get the correct datasource UID. 
+    // 4 == Sandbox == 000000006, 
+    // 5 == Production == 000000007. 
     let mut uid = "".to_string();
     if group.grafana_url.ends_with("4") {
         uid = "000000006".to_string();
@@ -167,9 +170,6 @@ async fn fetch_grafana_logs(session_cookie: String, group: Group, time_frame: u6
             "queries": [{
                 "alias": "",
                 "bucketAggs": [],
-                // The conditional below is a hack to get the correct datasource UID. 
-                // 4 == Sandbox == 000000006, 
-                // 5 == Production == 000000007. 
                 "datasource": {"type": "elasticsearch", "uid": uid},
                 "metrics": [{"id": "1", "type": "logs", "settings": {"limit": "10000"}}],
                 "query": query,
@@ -271,7 +271,6 @@ fn format_logs(log_groups: HashMap<String, HashMap<String, LogCount>>) -> Result
 
     let mut formatted_logs = String::new();
     for group_name in ordered_keys {
-        // Logs = Hashmap<Message, {source, count}>
         formatted_logs.push_str(&format!("{}:\n", group_name));
 
         let logs = log_groups

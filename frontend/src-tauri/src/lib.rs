@@ -117,15 +117,21 @@ async fn get_group_metrics(id: String, time_frame: u64) -> Result<String, String
 
     let group = groups.into_iter().find(|group| group.id == id).ok_or_else(|| "Group not found".to_string())?;
 
-    let script_dir = if cfg!(debug_assertions) { get_base_dir().join("../../backend") } else { get_base_dir().join("python_scripts") };
+    let script_dir = if cfg!(debug_assertions) { get_base_dir().join("../../backend") } else { get_base_dir().join("backend") };
 
-    let output = std::process::Command::new("python")
-        .arg(script_dir.join("main.py"))
+    let mut cmd = std::process::Command::new("python");
+    cmd.arg(script_dir.join("main.py"))
         .arg(&group.grafana_url)
         .arg(&format!("{}h", time_frame))
-        .arg(&id)
-        .output()
-        .map_err(|e| e.to_string())?;
+        .arg(&id);
+
+    #[cfg(target_os = "windows")]
+    {
+        use std::os::windows::process::CommandExt;
+        cmd.creation_flags(0x08000000); // CREATE_NO_WINDOW
+    }
+
+    let output = cmd.output().map_err(|e| e.to_string())?;
 
     let output_str = String::from_utf8_lossy(&output.stdout);
     let output_json: Value = serde_json::from_str(&output_str).map_err(|e| e.to_string())?;
@@ -371,7 +377,7 @@ fn clean_log_message(log: String) -> Result<String, String> {
 
 #[tauri::command]
 fn read_screenshot(group_id: String) -> Result<String, String> {
-    let data_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../data/screenshots");
+    let data_dir = if cfg!(debug_assertions) { get_base_dir().join("../../data/screenshots") } else { get_base_dir().join("data/screenshots") };
 
     // Find the latest screenshot for this group
     let entries = fs::read_dir(&data_dir).map_err(|e| e.to_string())?;

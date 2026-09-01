@@ -18,17 +18,11 @@ You may copy both the screenshot and also the formatted analytics themselves by 
 
 ## Installation
 
-First, go to the `backend/` directory and use `pip install -r requirements.txt` to install all python dependencies. Make sure you're on Python >=3.14.0.
+First, go to the *Releases* on this this repositories GitHub page, and install the latest release `.zip` file.
 
-Next, go to the `frontend/` directory and make sure you have `rust` installed. Then, using `cargo install` in the `frontend/src-tauri/` directory install the necessary Rust Crates.
+Then, go to the `backend/` directory and use `pip install -r requirements.txt` to install all python dependencies. Make sure you're on `python >= 3.14.0`.
 
-Lastly, go to the `frontend/src` directory, and run making sure you have both `node` and `npm` installed, run `npm install`.
-
-Now that everything is installed, just run `npm run tauri dev` in the `frontend/` directory and you're good to go.
-
-I am too lazy to make a build.
-
-__Note:__ There is probably something missing here so just message yours truly if there is an issue
+Next, just run `chmod +x rota-automation-frontend.exe`. Finally, just run `./rota-automation.frontend.exe`.
 
 ## Important Notes
 

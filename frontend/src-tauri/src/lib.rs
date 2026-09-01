@@ -258,7 +258,7 @@ async fn fetch_grafana_logs(session_cookie: String, group: Group, time_frame: u6
                         .get_mut("Publisher Errors")
                         .ok_or("Failed to get mutable reference")?
                         .insert(error_message.clone(), error_log.clone());
-                } else if source_type == "worker" {
+                } else if source_type == "worker" || source_type == "worker-async-cmd" {
                     log_groups
                         .get_mut("Worker Errors")
                         .ok_or("Failed to get mutable reference")?
